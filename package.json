@@ -2,7 +2,7 @@
   "name": "node-trader",
   "version": "0.1.0",
   "description": "A cli tool for making trades on the stock market",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/oyciny/node-trader/issues"
   },
-  "homepage": "https://github.com/oyciny/node-trader#readme"
+  "homepage": "https://github.com/oyciny/node-trader#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^8.3.0",
+    "conf": "^10.0.3",
+    "inquirer": "^8.2.0"
+  }
 }
