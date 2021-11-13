@@ -2,6 +2,7 @@ const { program, Option, Argument } = require('commander')
 const config = new (require('conf'))
 const Auth = new (require('./utils/Auth'))
 const version = require('../package.json').version
+const chalk = require('chalk')
 
 program.version(version)
 
@@ -26,9 +27,9 @@ program
         } else if (program.opts().remove) {
             Auth.removeCredentials(service)
                 .then(() => {
-                    console.log('Credentials removed')
+                    console.log(chalk.green('Credentials removed'))
                 }).catch(err => {
-                    console.log(err)
+                    console.log(chalk.redBright(err))
                 })
         } else {
             Auth.showCredentials(service)

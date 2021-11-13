@@ -1,38 +1,12 @@
 const inquirer = require('inquirer')
 const config = new (require('conf'))
 const Robinhood = require('robinhood')
+const chalk = require('chalk')
 const ch = require('cipherhash')
 
 class Auth {
 
-    link(callback) {
-        inquirer.prompt([
-            {type: 'list', message: 'Choose Service:', name: 'service', choices: ['Robinhood', 'Webull'] }
-        ]).then(a => {
-            if (a.service === 'Robinhood') {
-                if (!config.get('robinhood')) {
-                    this.defineRobinhoodCredentials(() => {
-                        console.log(config.get('robinhood'))
-                    })
-                }
-                if (config.get('robinhood')) {
-                    // Handle Login
-                }
-            }
-            if (a.service === 'Webull') {
-                if (!config.get('webull')) {
-                    this.defineWebullCredentials(() => {
-                        // Handle Login
-                        console.log(config.get('webull'))
-                    })
-                }
-                if (config.get('webull')) {
-                    // Handle Login
-                }
-            }
-        }).then(callback)
-    }
-
+    // Define Credentials for Webull
     defineWebullCredentials(callback) {
         inquirer.prompt([
             { type: 'input', message: 'Webull Username: ', name: 'username' },
@@ -47,6 +21,7 @@ class Auth {
         }).then(callback)
     }
 
+    // Define Credentials for Robinhood
     defineRobinhoodCredentials(callback) {
         inquirer.prompt([
             { type: 'input', message: 'Robinhood Username: ', name: 'username' },
@@ -61,77 +36,31 @@ class Auth {
         }).then(callback)
     }
 
+    // Delete Credentails for the selected service
     removeCredentials(service) {
         return new Promise((resolve, reject) => {
             config.delete(service)
             if (!config.get(service)) {
                 resolve()
             } else {
-                reject('Error: credentials not removed')
+                reject(chalk.red('Error: credentials not removed'))
             }
         })
     }
 
+    // Show Credentails for the selected service *Password Protected
     showCredentials(service) {
         if (!config.get(service)) {
-            console.log('No credentials saved for ' + service)
+            console.log(chalk.redBright('No credentials saved for ' + service))
         } else {
             inquirer.prompt([
                 { type: 'password', message: 'Please enter your security passphrase: ', name: 'passphrase' }
             ]).then(a => {
-                const credentials = config.get(service).credentials
-                console.log(ch.unCipherHash(credentials, a.passphrase))
+                const credentials = JSON.parse(ch.unCipherHash(config.get(service).credentials, a.passphrase))
+                console.log(`${chalk.green('Username: ')}${chalk.italic(credentials.username)}\n${chalk.green('Password: ')}${chalk.italic(credentials.password)}`)
             })
         }
     }
-
-/*
-    login() {
-        // check if auth has been set
-        if (!config.get('auth')) {
-            // Auth is undefined so define it
-            inquirer.prompt([
-                { type: 'input', message: 'Username: ', name: 'username' },
-                { type: 'password', message: 'Password: ', name: 'password' }
-            ]).then(a => {
-                this.cipher = c.cipherHash(a.password, a.password + a.username + '-chipher')
-                this.username = a.username
-                this.password = c.cipherHash(a.password, this.cipher)
-            }).then(() => {
-                config.set('auth', { username: this.username, password: this.password })
-            }).then(() => {
-                // Handle Login
-                return this.session()
-            }).catch(err => {
-                console.log(err)
-            })
-        }
-        if (config.get('auth')) {
-            // Handle Login
-            return this.session()
-        }
-    }
-
-    logout() {
-        if (!config.get('auth')) {
-            console.error('Fail: No Auth Object has been set')
-        }
-        if (config.get('auth')) {
-            config.delete('auth')
-            console.log('Logout Successfull')
-        }
-    }
-
-    session() {
-        if (!config.get('auth')) {
-            this.login()
-        }
-        if (config.get('auth')) {
-            const auth = config.get('auth')
-            return Robinhood({ username: auth.username, password: c.unCipherHash(auth.password, auth.password + auth.username + "-cipher")})
-        }
-    }
-    */
 }
 
 module.exports = Auth
