@@ -4,7 +4,7 @@
   "description": "A cli tool for making trades on the stock market",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node src/index.js"
   },
   "repository": {
     "type": "git",
@@ -18,8 +18,11 @@
   "homepage": "https://github.com/oyciny/node-trader#readme",
   "dependencies": {
     "chalk": "^4.1.2",
+    "cipherhash": "^1.0.4",
     "commander": "^8.3.0",
     "conf": "^10.0.3",
-    "inquirer": "^8.2.0"
+    "inquirer": "^8.2.0",
+    "robinhood": "^1.8.0",
+    "yargs": "^17.2.1"
   }
 }
