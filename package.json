@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/oyciny/node-trader/issues"
   },
-  "homepage": "https://github.com/oyciny/node-trader#readme",
+  "homepage": "https://oyciny.github.io/node-trader/",
   "dependencies": {
     "chalk": "^4.1.2",
     "cipherhash": "^1.0.4",
