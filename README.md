@@ -13,7 +13,7 @@ Once Node has been installed simply run the following command in your terminal:
 Once you have installed both Node.js and Node Trader you are ready to get Started
 
 ### Login
-Now that you have Node Trader installed you can save your login credentials using the  
+Now that you have Node Trader installed you can save your login credentials using the
 following command:  
 
 **For Robinhood**  
@@ -31,7 +31,7 @@ Using node-trader is pretty straight forward. Buy and Sell commands are done lik
 ```console
 > node-trader buy -s robinhood AAPL 10
 ```  
-This will initiate a buy order on your robinhood account for 10 shares of the AAPL  
+This will initiate a buy order on your robinhood account for 10 shares of the AAPL
 ticker symbol. If you prefer to buy in dollar amounts just pass the dollar flag like so:  
 ```console
 > node-trader buy -s robinhood AAPL -d 10
