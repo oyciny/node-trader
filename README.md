@@ -15,6 +15,7 @@ Once you have installed both Node.js and Node Trader you are ready to get Starte
 ### Login
 Now that you have Node Trader installed you can save your login credentials using the  
 following command:  
+
 **For Robinhood**  
 ```console
 > node-trader service -l robinhood
@@ -38,6 +39,7 @@ ticker symbol. If you prefer to buy in dollar amounts just pass the dollar flag 
 
 ### Managing Credentials
 Credentials are managed with the service command. To add credentails use:  
+
 **Robinhood**
 ```console
 > node-trader service -l robinhood
@@ -46,7 +48,10 @@ Credentials are managed with the service command. To add credentails use:
 ```console
 > node-trader service -l webull
 ```  
+*Note: You can only save one set of credentials for each service*  
+
 To remove credentials use:  
+
 **Robinhood**
 ```console
 > node-trader service -r robinhood
@@ -56,6 +61,7 @@ To remove credentials use:
 > node-trader service -r webull
 ```  
 To see your credentails use:  
+
 **Robinhood**
 ```console
 > node-trader service robinhood
