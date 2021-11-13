@@ -4,7 +4,12 @@
   "description": "A cli tool for making trades on the stock market",
   "main": "src/index.js",
   "scripts": {
-    "dev": "node src/index.js"
+    "add-rh": "node src/index.js service -l robinhood",
+    "remove-rh": "node src/index.js service -r robinhood",
+    "rh": "node src/index.js service robinhood",
+    "add-wb": "node src/index.js service -l webull",
+    "remove-wb": "node src/index.js service -r webull",
+    "wb": "node src/index.js service webull"
   },
   "repository": {
     "type": "git",
